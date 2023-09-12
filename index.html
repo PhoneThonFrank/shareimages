@@ -96,7 +96,7 @@
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     uploadedImage.src = e.target.result;
-                    imageUrl.value = 'file:///d%3A/Share%20Image/receive.html' + '?link=' + encodeURIComponent(e.target.result);
+                    imageUrl.value = 'https://phonethonfrank.github.io/shareimages/receive.html' + '?link=' + encodeURIComponent(e.target.result);
                     uploadedImage.style.display = 'none';
                     imageLinkContainer.style.display = 'block';
                     copyImageUrl.style.display = 'block';
