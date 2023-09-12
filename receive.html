@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receive Image</title>
+    <style>
+        #imageContainer{
+            width: 500px;
+            height: 500px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+        }
+        h1 {
+            color: #333;
+        }
+        img {
+            max-width: 400px;
+            max-height: 500px;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .download-button {
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Received Image</h1>
+        <div id="imageContainer">
+            <img id="receivedImage" src="" alt="Received Image">
+        </div>
+        <a id="downloadButton" class="download-button" download="received_image.jpg" style="display: none;">Download Image</a>
+    </div>
+    <script>
+        // Function to get the query parameter value by name
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Get the "link" query parameter value
+        const link = getQueryParam("link");
+
+        // Display the image based on the "link" value
+        if (link) {
+            const receivedImage = document.getElementById("receivedImage");
+            receivedImage.src = decodeURIComponent(link);
+            receivedImage.style.display = "block";
+
+            const downloadButton = document.getElementById("downloadButton");
+            downloadButton.href = decodeURIComponent(link);
+            downloadButton.style.display = "block";
+        }
+    </script>
+</body>
+</html>

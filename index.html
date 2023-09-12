@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Uploader</title>
+    
+      <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        h1 {
+            color: #333;
+        }
+        #imageInput {
+            display: none;
+        }
+        #uploadButton {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+        #copyImageUrl {
+            padding: 10px 20px;
+            background-color: #53759c;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+        input {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+   
+</head>
+<body>
+    <div class="container">
+        <h1>Image Uploader</h1>
+        <input type="file" id="imageInput" accept="image/*" style="display: none;">
+        <button id="uploadButton">Upload Your Image</button>
+        <br>
+        <img id="uploadedImage" src="" alt="Uploaded Image" style="display: none;">
+        <div id="imageLinkContainer" style="display: none;"><br>
+            <input type="text" id="imageUrl" readonly>
+            <button id="copyImageUrl" onclick="copyImageLink()">Copy Link</button>
+        </div>
+        
+        
+    </div>
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const uploadButton = document.getElementById('uploadButton');
+        const uploadedImage = document.getElementById('uploadedImage');
+        const imageUrl = document.getElementById('imageUrl');
+        const copyImageUrl = document.getElementById('copyImageUrl');
+        const imageLink = document.getElementById('imageLink');
+        const copyImageButton = document.getElementById('copyImageButton');
+
+        function copyImageLink() {
+            imageUrl.select();
+            document.execCommand('copy');
+            alert('Image link copied to clipboard!');
+        }
+
+        uploadButton.addEventListener('click', () => {
+            imageInput.click();
+        });
+
+        imageInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    uploadedImage.src = e.target.result;
+                    imageUrl.value = 'file:///d%3A/Share%20Image/receive.html' + '?link=' + encodeURIComponent(e.target.result);
+                    uploadedImage.style.display = 'none';
+                    imageLinkContainer.style.display = 'block';
+                    copyImageUrl.style.display = 'block';
+                    imageLink.href = e.target.result;
+                    imageLink.style.display = 'block';
+                    copyImageButton.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
