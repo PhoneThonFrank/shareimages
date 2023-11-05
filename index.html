@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="my" lang="en">
+  <head>
+    <title>ဘုန်းသွန်းလျှံ မြတ်ပုတီး</title>
+  <style>
+body {
+    display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 97vh;
+background-color: rgb(179, 233, 255);
+  }
+  
+  .container {
+  position: relative;
+width: 300px;
+height: 420px;
+background-color: rgb(247, 211, 84);
+border-radius: 120px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+text-align: center;
+align-items: center;
+  }
+  
+  .counter {
+    font-size: 5rem;
+    font-style: bold;
+    margin-bottom: 2rem;
+    color: black;
+  }
+  
+  .turn {
+    font-size: 2rem;
+    color: black;
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+  
+  .btn {
+    background-color: dodgerblue;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+  #incrementBtn{
+  width: 150px;
+  border-radius: 50%;
+  height: 150px;
+  display:none;
+  }
+  #resetBtn{
+  width: 50px;
+  border-radius: 50%;
+  height: 50px;
+
+  }
+  #re{
+    text-align: right;
+align-items: right;
+}
+#re img{
+  width: 50px;
+  height: 50px;
+  }
+  #re img:active{
+    width: 35px;
+    height: 35px;
+    }
+    
+#rei img{
+  width: 135;
+  height: 135;
+}
+#rei img:active{
+  width: 125;
+  height: 125;
+}
+  .btn:hover {
+    background-color: deepskyblue;
+  }
+
+  /* Confirmation dialog styles */
+  .overlay {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .dialog {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.581), rgba(255, 255, 255, 0.718));
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+border:5px solid rgba(255, 255, 255, 0.18);
+box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+border:.1rem solid rgb(255, 255, 255);
+text-align: center; 
+
+    padding: 2rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .dialog h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .dialog .btn {
+    margin-top: 1rem;
+  }
+
+  img{
+border-radius: 50%;
+border: 1px;
+border-color: black;
+}
+
+#span{
+
+font-size: 35px;
+color: rgb(0, 0, 0);
+}
+.clock{
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.581), rgba(255, 255, 255, 0.718));
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+border:5px solid rgba(255, 255, 255, 0.18);
+box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+border:.1rem solid rgb(255, 255, 255);
+text-align: center; 
+border-radius: 5px; 
+}
+
+
+  </style>
+
+  </head>   <div class="clock">
+
+    
+        <span id="span"></span>
+      </div><br>
+  <body>
+
+
+    <div class="container">
+
+      <div class="counter">0</div>
+      <div class="turn">Turn: 0</div>
+      <div id="re">
+      <img src="https://i.ibb.co/hW5f6BV/button.png" class="btnidk" id="resetBtn" onclick="playCoin()"></div>
+      <button class="btn" id="incrementBtn"></button>
+      <div id="rei">
+      <img src="https://i.ibb.co/hW5f6BV/button.png" width="135" onclick="playMusic(),increment()">
+      </div>
+    </div>
+    <audio id="myAudio">
+        <source src="https://storage.googleapis.com/padlet-uploads/1778041610/08ad185f847e6007772621c733f48cf3/Ship_Bell.mp3?Expires=1699767723&GoogleAccessId=778043051564-q79bsd8mc40b0bl82ikkrtc3jdofe4dg%40developer.gserviceaccount.com&Signature=d2RmlCLemkxvGt7zUNrVBZ8AwoR556EO1mryeQ5OhN8nOAw0B%2BsWdnaiznk%2FkF8biPwHZp6xEJh0Zd7ZXl9M%2FEh3sc%2FxDy4Hrc7bIBq1TRTpo3Yzve0AZ0vQstuszo9d5X%2Fojlhg4zy6Qb9D3dmFt9DP7yvTeK7jNeByc1lNX1k%3D&original-url=https%3A%2F%2Fpadlet-uploads.storage.googleapis.com%2F1778041610%2F08ad185f847e6007772621c733f48cf3%2FShip_Bell.mp3"/>
+      </audio>
+      <audio id="mycoin">
+        <source src="https://storage.googleapis.com/padlet-uploads/1778041610/347b335104a1f80f279e9c39275f8f1c/Coin.mp3?Expires=1699767937&GoogleAccessId=778043051564-q79bsd8mc40b0bl82ikkrtc3jdofe4dg%40developer.gserviceaccount.com&Signature=xtE9HHss0X5ol%2Bxym%2BF505CUclr8Xbs5125xLhYOSwd22v1fg3T%2BY3psk0NV6KI7q5p8JqwLpJQuU%2BB6MIYpbMpmdwa%2F5DPN38mwALlDgo8bwmHVuKZlP8qJqe3H13k4ZICOpv5SnqPEkVXQPBL%2BKb4S8DGy4hP2ABZS2Cj69fY%3D&original-url=https%3A%2F%2Fpadlet-uploads.storage.googleapis.com%2F1778041610%2F347b335104a1f80f279e9c39275f8f1c%2FCoin.mp3"/>
+      </audio>
+
+
+
+    <!-- Confirmation dialog box -->
+    <div class="overlay" id="overlay">
+      <div class="dialog">
+        <h2>Are you sure you want to reset?</h2>
+        <button class="btn" id="confirmResetBtn">Yes</button>
+        <button class="btn" id="cancelResetBtn">No</button>
+      </div>
+    </div>
+<script>
+  var span = document.getElementById('span');
+
+function time() {
+  var d = new Date();
+  var s = d.getSeconds();
+  var m = d.getMinutes();
+  var h = d.getHours();
+  span.textContent = 
+    (h) + ":" + ("0" + m).substr(-2) + ":" + ("0" + s).substr(-2);
+}
+
+setInterval(time, 1000);
+function playMusic() {
+    var audio = document.getElementById("myAudio");
+    audio.play();
+  }
+
+      function playCoin() {
+        var audio = document.getElementById("mycoin");
+        audio.play();
+      }
+      let count = parseInt(localStorage.getItem('count')) || 0;
+      let turn = parseInt(localStorage.getItem('turn')) || 0;
+
+      document.querySelector('.counter').textContent = count;
+      document.querySelector('.turn').textContent = `Turn: ${turn}`;
+
+      const incrementBtn = document.querySelector('#incrementBtn');
+      incrementBtn.addEventListener('click', increment);
+
+      const resetBtn = document.querySelector('#resetBtn');
+      resetBtn.addEventListener('click', showResetDialog);
+
+      const confirmResetBtn = document.querySelector('#confirmResetBtn');
+      confirmResetBtn.addEventListener('click', reset);
+
+      const cancelResetBtn = document.querySelector('#cancelResetBtn');
+     
+cancelResetBtn.addEventListener('click', hideResetDialog);
+
+
+    function increment() {
+      count++;
+      document.querySelector('.counter').textContent = count;
+      if (count % 108 === 0) {
+        turn++;
+        document.querySelector('.turn').textContent = `Turn: ${turn}`;
+      }
+      localStorage.setItem('count', count);
+      localStorage.setItem('turn', turn);
+    }
+
+
+  function reset() {
+    count = 0;
+    turn = 0;
+    document.querySelector('.counter').textContent = count;
+    document.querySelector('.turn').textContent = `Turn: ${turn}`;
+    localStorage.setItem('count', count);
+    localStorage.setItem('turn', turn);
+    hideResetDialog();
+  }
+
+  function showResetDialog() {
+    const overlay = document.querySelector('#overlay');
+    overlay.style.display = 'flex';
+  }
+
+  function hideResetDialog() {
+    const overlay = document.querySelector('#overlay');
+    overlay.style.display = 'none';
+  }
+</script>
+  </body>
+</html>
